@@ -5,6 +5,14 @@
 GET {{ baseUrl }}/recados/
 ###
 GET {{ baseUrl }}/recados/1/
+###
+POST {{ baseUrl }}/recados/
+Content-Type: application/json
+
+{
+  "titulo": "Novo Recado",
+  "conteudo": "Este é o conteúdo do novo recado."
+}
 
 
 
