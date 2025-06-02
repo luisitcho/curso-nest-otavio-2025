@@ -8,6 +8,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 
 // CRUD
@@ -26,13 +27,20 @@ interface CreateRecadoDto {
   descricao: string;
 }
 
+interface PaginatinonQuery {
+  limit?: number; // Limite de recados a serem retornados
+  offset?: number; // Posição inicial para a busca de recados
+}
+
 @Controller('recados')
 export class RecadosController {
   // Encontrar todos os recados
   @HttpCode(HttpStatus.OK) // Define o código de status HTTP para 200 OK
   @Get() // /recados
-  findAll() {
-    return 'Essa rota retorna todos os recados';
+  findAll(@Query() pagination: PaginatinonQuery) {
+    console.log(pagination);
+    const { limit = 10, offset = 0 } = pagination;
+    return `Essa rota retorna todos os recados com limite de ${limit} e offset de ${offset}`;
   }
 
   // Encontrar um recado específico
