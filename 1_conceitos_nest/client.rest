@@ -21,6 +21,8 @@ Content-Type: application/json
   "conteudo": "Este é a atualização no conteúdo do recado.",
   "atualizado": true
 }
+### Deleta um recado
+DELETE {{ baseUrl }}/recados/1/
 
 
 

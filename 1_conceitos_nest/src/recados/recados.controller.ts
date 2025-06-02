@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -52,5 +53,10 @@ export class RecadosController {
       id,
       ...body,
     };
+  }
+
+  @Delete(':id') // /recados/:id
+  remove(@Param('id') id: string) {
+    return `Recado com ID ${id} foi removido com sucesso`;
   }
 }
