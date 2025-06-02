@@ -1,11 +1,11 @@
 @baseUrl = http://localhost:3000
 
 # RECADOS
-###
+### Lista todos os recados
 GET {{ baseUrl }}/recados/
-###
+### Lista um recado específico
 GET {{ baseUrl }}/recados/1/
-###
+### Cria um novo recado
 POST {{ baseUrl }}/recados/
 Content-Type: application/json
 
@@ -13,7 +13,14 @@ Content-Type: application/json
   "titulo": "Novo Recado",
   "conteudo": "Este é o conteúdo do novo recado."
 }
+### Atualiza um recado
+PATCH  {{ baseUrl }}/recados/1/
+Content-Type: application/json
 
+{
+  "conteudo": "Este é a atualização no conteúdo do recado.",
+  "atualizado": true
+}
 
 
 
