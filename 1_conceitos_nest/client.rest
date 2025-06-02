@@ -9,7 +9,7 @@ GET {{ baseUrl }}/home/hello/
 ### AppControllerGetExample
 
 # @name AppControllerGetExample
-GET {{ baseUrl }}/home/example
+GET {{ baseUrl }}/home/example/
 
 
 ### ConceitosManualController
