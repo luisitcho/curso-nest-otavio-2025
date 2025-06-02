@@ -7,12 +7,12 @@ export class AppController {
 
   // Método da solicitação -> Ler (Read) -> CRUD
   // /home/hello
-  @Get('hello')
+  // @Get('hello')
   getHello(): string {
     return this.appService.getHello();
   }
 
-  @Get('example')
+  // @Get('example')
   getExample(): string {
     return this.appService.getExample();
   }
