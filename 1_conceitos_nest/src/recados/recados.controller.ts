@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+} from '@nestjs/common';
 
 // Definição dos campos esperados no corpo da requisição
 interface CreateRecadoDto {
@@ -9,6 +17,7 @@ interface CreateRecadoDto {
 @Controller('recados')
 export class RecadosController {
   // Encontrar todos os recados
+  @HttpCode(HttpStatus.OK) // Define o código de status HTTP para 200 OK
   @Get() // /recados
   findAll() {
     return 'Essa rota retorna todos os recados';
