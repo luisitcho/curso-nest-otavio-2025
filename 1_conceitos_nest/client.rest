@@ -13,19 +13,25 @@ POST {{ baseUrl }}/recados/
 Content-Type: application/json
 
 {
-  "titulo": "Novo Recado",
-  "conteudo": "Este é o conteúdo do novo recado."
+  "texto": "NOVO recado",
+  "de": "Joana",
+  "para": "João",
+  "lido": false,
+  "data": "2025-06-03T02:53:58.504Z"
 }
 ### Atualiza um recado
-PATCH  {{ baseUrl }}/recados/1/
+PATCH  {{ baseUrl }}/recados/2/
 Content-Type: application/json
 
 {
-  "conteudo": "Este é a atualização no conteúdo do recado.",
-  "atualizado": true
+  "texto": "NOVO recado",
+  "de": "Joana",
+  "para": "João",
+  "lido": false,
+  "data": "2025-06-03T02:53:58.504Z"
 }
 ### Deleta um recado
-DELETE {{ baseUrl }}/recados/1/
+DELETE {{ baseUrl }}/recados/2/
 
 
 

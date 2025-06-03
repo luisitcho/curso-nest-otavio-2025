@@ -40,22 +40,31 @@ export class RecadosController {
   @HttpCode(HttpStatus.OK) // Define o código de status HTTP para 200 OK
   @Get() // /recados
   findAll(@Query() pagination: PaginatinonQuery) {
-    console.log(pagination);
-    const { limit = 10, offset = 0 } = pagination;
+    // const { limit = 10, offset = 0 } = pagination;
     // return `Essa rota retorna todos os recados com limite de ${limit} e offset de ${offset}`;
-    return this.recadosService.hello();
+    return this.recadosService.findAll();
   }
 
   // Encontrar um recado específico
   @Get(':id') // /recados/:id
   findOne(@Param('id') id: string) {
-    return `Essa rota retorna um recado específico com o ID: ${id}`;
+    return this.recadosService.findOne(id);
   }
 
   // Criar um novo recado
   @Post() // /recados
   create(@Body() body: CreateRecadoDto) {
-    return body;
+    // Map CreateRecadoDto to the expected RecadoEntity shape (without id)
+    const novoRecado = {
+      titulo: body.titulo,
+      descricao: body.descricao,
+      texto: body.descricao, // or another mapping as needed
+      de: '', // provide default or extract from somewhere
+      para: '', // provide default or extract from somewhere
+      lido: false, // default value
+      data: new Date(), // or another default
+    };
+    return this.recadosService.create(novoRecado);
   }
 
   @Patch(':id') // /recados/:id
