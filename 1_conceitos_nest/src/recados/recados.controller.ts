@@ -10,6 +10,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { RecadosService } from './recados.service';
 
 // CRUD
 // Create -> POST -> Criar um recado
@@ -34,13 +35,15 @@ interface PaginatinonQuery {
 
 @Controller('recados')
 export class RecadosController {
+  constructor(private readonly recadosService: RecadosService) {}
   // Encontrar todos os recados
   @HttpCode(HttpStatus.OK) // Define o código de status HTTP para 200 OK
   @Get() // /recados
   findAll(@Query() pagination: PaginatinonQuery) {
     console.log(pagination);
     const { limit = 10, offset = 0 } = pagination;
-    return `Essa rota retorna todos os recados com limite de ${limit} e offset de ${offset}`;
+    // return `Essa rota retorna todos os recados com limite de ${limit} e offset de ${offset}`;
+    return this.recadosService.hello();
   }
 
   // Encontrar um recado específico
