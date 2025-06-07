@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { RecadoEntity } from './entities/recado.entity';
 
 @Injectable()
@@ -15,12 +15,20 @@ export class RecadosService {
     },
   ];
 
+  throwNotFoundError() {
+    throw new NotFoundException('Recado não encontrado');
+  }
+
   findAll() {
     return this.recados;
   }
 
   findOne(id: string) {
-    return this.recados.find((recado) => recado.id === Number(id));
+    const recado = this.recados.find((recado) => recado.id === Number(id));
+
+    if (recado) return recado;
+
+    // throw new HttpException('Recado não encontrado', HttpStatus.NOT_FOUND);
   }
 
   create(body: Omit<RecadoEntity, 'id'>) {
@@ -40,14 +48,18 @@ export class RecadosService {
       (item) => item.id === +id,
     );
 
-    if (recadoExistenteIndex >= 0) {
-      const recadoExistente = this.recados[recadoExistenteIndex];
-
-      this.recados[recadoExistenteIndex] = {
-        ...recadoExistente,
-        ...body,
-      };
+    if (recadoExistenteIndex < 0) {
+      this.throwNotFoundError();
     }
+
+    const recadoExistente = this.recados[recadoExistenteIndex];
+
+    this.recados[recadoExistenteIndex] = {
+      ...recadoExistente,
+      ...body,
+    };
+
+    return this.recados[recadoExistenteIndex];
   }
 
   remove(id: string) {
@@ -55,8 +67,13 @@ export class RecadosService {
       (item) => item.id === +id,
     );
 
-    if (recadoExistenteIndex >= 0) {
-      this.recados.splice(recadoExistenteIndex, 1);
+    if (recadoExistenteIndex < 0) {
+      this.throwNotFoundError();
     }
+
+    const recado = this.recados[recadoExistenteIndex];
+    this.recados.splice(recadoExistenteIndex, 1);
+
+    return recado;
   }
 }

@@ -26,6 +26,8 @@ import { RecadosService } from './recados.service';
 interface CreateRecadoDto {
   titulo: string;
   descricao: string;
+  de: string;
+  para: string;
 }
 
 interface PaginatinonQuery {
@@ -54,29 +56,26 @@ export class RecadosController {
   // Criar um novo recado
   @Post() // /recados
   create(@Body() body: CreateRecadoDto) {
-    // Map CreateRecadoDto to the expected RecadoEntity shape (without id)
     const novoRecado = {
       titulo: body.titulo,
       descricao: body.descricao,
-      texto: body.descricao, // or another mapping as needed
-      de: '', // provide default or extract from somewhere
-      para: '', // provide default or extract from somewhere
-      lido: false, // default value
-      data: new Date(), // or another default
+      texto: body.descricao,
+      de: body.de,
+      para: body.para,
+      lido: false,
+      data: new Date(),
     };
     return this.recadosService.create(novoRecado);
   }
 
   @Patch(':id') // /recados/:id
   update(@Param('id') id: string, @Body() body: CreateRecadoDto) {
-    return {
-      id,
-      ...body,
-    };
+    return this.recadosService.update(id, body);
   }
 
   @Delete(':id') // /recados/:id
   remove(@Param('id') id: string) {
-    return `Recado com ID ${id} foi removido com sucesso`;
+    return this.recadosService.remove(id);
+    // return `Recado com ID ${id} foi removido com sucesso`;
   }
 }
