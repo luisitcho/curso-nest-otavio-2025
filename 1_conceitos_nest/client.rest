@@ -26,10 +26,7 @@ Content-Type: application/json
 
 {
   "texto": "NOVO recado",
-  "de": "Joana",
-  "para": "João",
-  "lido": false,
-  "data": "2025-06-03T02:53:58.504Z"
+  "lido": true
 }
 
 ### Deleta um recado
