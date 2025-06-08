@@ -21,11 +21,11 @@ Content-Type: application/json
 }
 
 ### Atualiza um recado
-PATCH  {{ baseUrl }}/recados/2/
+PATCH  {{ baseUrl }}/recados/5/
 Content-Type: application/json
 
 {
-  "texto": "NOVO recado",
+  "texto": "4445 NOVO recado",
   "lido": true
 }
 

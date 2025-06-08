@@ -12,18 +12,6 @@ export class RecadosService {
     private readonly recadoRepository: Repository<RecadoEntity>,
   ) {}
 
-  private lastId = 1;
-  private recados: RecadoEntity[] = [
-    {
-      id: 1,
-      texto: 'Este é um recado de teste',
-      de: 'Joana',
-      para: 'João',
-      lido: false,
-      data: new Date(),
-    },
-  ];
-
   throwNotFoundError() {
     throw new NotFoundException('Recado não encontrado');
   }
@@ -60,23 +48,22 @@ export class RecadosService {
     return this.recadoRepository.save(reacdo);
   }
 
-  update(id: number, updateRecadoDto: UpdateRecadoDto) {
-    const recadoExistenteIndex = this.recados.findIndex(
-      (item) => item.id === id,
-    );
+  async update(id: number, updateRecadoDto: UpdateRecadoDto) {
+    const partialUpdateRecadoDto = {
+      lido: updateRecadoDto?.lido,
+      texto: updateRecadoDto?.texto,
+    };
 
-    if (recadoExistenteIndex < 0) {
+    const recado = await this.recadoRepository.preload({
+      id,
+      ...partialUpdateRecadoDto,
+    });
+
+    if (!recado) {
       this.throwNotFoundError();
     }
 
-    const recadoExistente = this.recados[recadoExistenteIndex];
-
-    this.recados[recadoExistenteIndex] = {
-      ...recadoExistente,
-      ...updateRecadoDto,
-    };
-
-    return this.recados[recadoExistenteIndex];
+    return this.recadoRepository.save(recado as RecadoEntity);
   }
 
   async remove(id: number) {
