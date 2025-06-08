@@ -2,9 +2,16 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { RecadoEntity } from './entities/recado.entity';
 import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class RecadosService {
+  constructor(
+    @InjectRepository(RecadoEntity)
+    private readonly recadoRepository: Repository<RecadoEntity>,
+  ) {}
+
   private lastId = 1;
   private recados: RecadoEntity[] = [
     {
@@ -21,12 +28,19 @@ export class RecadosService {
     throw new NotFoundException('Recado não encontrado');
   }
 
-  findAll() {
-    return this.recados;
+  async findAll() {
+    const recados = await this.recadoRepository.find();
+    return recados;
   }
 
-  findOne(id: number) {
-    const recado = this.recados.find((recado) => recado.id === Number(id));
+  async findOne(id: number) {
+    // const recado = this.recados.find((recado) => recado.id === Number(id));
+
+    const recado = await this.recadoRepository.findOne({
+      where: {
+        id,
+      },
+    });
 
     if (recado) return recado;
 
