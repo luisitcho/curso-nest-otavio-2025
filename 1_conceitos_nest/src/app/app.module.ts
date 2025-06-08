@@ -13,8 +13,8 @@ import { RecadosModule } from 'src/recados/recados.module';
       username: 'postgres',
       password: 'postgres',
       database: 'myapp_db',
-      autoLoadEntities: true,
-      synchronize: true, // ATENÇÃO: só para desenvolvimento
+      autoLoadEntities: true, // carrega entidades automaticamente sem precisar especificar
+      synchronize: true, // Sincroniza com o DB | ATENÇÃO: só para desenvolvimento
     }),
     RecadosModule,
   ],
