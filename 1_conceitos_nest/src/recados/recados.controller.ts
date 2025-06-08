@@ -11,6 +11,8 @@ import {
   Query,
 } from '@nestjs/common';
 import { RecadosService } from './recados.service';
+import { CreateRecadoDto } from './dto/create-recado.dto';
+import { UpdateRecadoDto } from './dto/update-recado.dto';
 
 // CRUD
 // Create -> POST -> Criar um recado
@@ -22,13 +24,16 @@ import { RecadosService } from './recados.service';
 // PATCH é utilizado para atualizar dados de um recurso
 // PUT é utilizado para atualizar um recurso inteiro
 
-// Definição dos campos esperados no corpo da requisição
-interface CreateRecadoDto {
-  titulo: string;
-  descricao: string;
-  de: string;
-  para: string;
-}
+// DTO - Data Transfer Object -> Objeto de transferência de dados
+// DTO -> Objeto simples -> Validar dados / Transformar dados
+
+// // Definição dos campos esperados no corpo da requisição
+// interface CreateRecadoDto {
+//   titulo: string;
+//   descricao: string;
+//   de: string;
+//   para: string;
+// }
 
 interface PaginatinonQuery {
   limit?: number; // Limite de recados a serem retornados
@@ -55,27 +60,17 @@ export class RecadosController {
 
   // Criar um novo recado
   @Post() // /recados
-  create(@Body() body: CreateRecadoDto) {
-    const novoRecado = {
-      titulo: body.titulo,
-      descricao: body.descricao,
-      texto: body.descricao,
-      de: body.de,
-      para: body.para,
-      lido: false,
-      data: new Date(),
-    };
-    return this.recadosService.create(novoRecado);
+  create(@Body() createRecado: CreateRecadoDto) {
+    return this.recadosService.create(createRecado);
   }
 
   @Patch(':id') // /recados/:id
-  update(@Param('id') id: string, @Body() body: CreateRecadoDto) {
-    return this.recadosService.update(id, body);
+  update(@Param('id') id: string, @Body() updateRecadoDto: UpdateRecadoDto) {
+    return this.recadosService.update(id, updateRecadoDto);
   }
 
   @Delete(':id') // /recados/:id
   remove(@Param('id') id: string) {
     return this.recadosService.remove(id);
-    // return `Recado com ID ${id} foi removido com sucesso`;
   }
 }
