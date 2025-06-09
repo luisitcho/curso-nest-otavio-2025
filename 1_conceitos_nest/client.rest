@@ -56,12 +56,11 @@ Content-Type: application/json
 }
 
 ### Atualiza um recado
-PATCH  {{ baseUrl }}/pessoas/5/
+PATCH  {{ baseUrl }}/pessoas/4/
 Content-Type: application/json
 
 {
-  "texto": "4445 NOVO recado",
-  "lido": true
+  "password": "111111"
 }
 
 ### Deleta um recado
