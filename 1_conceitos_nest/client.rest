@@ -51,11 +51,11 @@ Content-Type: application/json
 
 {
   "password": "123456",
-  "email": "luisitcho4@gmail.com",
-  "nome": "Pig"
+  "email": "luisitcho@gmail.com",
+  "nome": "jhow"
 }
 
-### Atualiza um recado
+### Atualiza uma pessoa
 PATCH  {{ baseUrl }}/pessoas/4/
 Content-Type: application/json
 
@@ -63,8 +63,8 @@ Content-Type: application/json
   "password": "111111"
 }
 
-### Deleta um recado
-DELETE {{ baseUrl }}/pessoas/1/
+### Deleta uma pessoa
+DELETE {{ baseUrl }}/pessoas/7/
 
 # ---------
 
