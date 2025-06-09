@@ -51,9 +51,21 @@ Content-Type: application/json
 
 {
   "password": "123456",
-  "email": "luisitcho1@gmail.com",
+  "email": "luisitcho@gmail.com",
   "nome": "Joana"
 }
+
+### Atualiza um recado
+PATCH  {{ baseUrl }}/pessoas/5/
+Content-Type: application/json
+
+{
+  "texto": "4445 NOVO recado",
+  "lido": true
+}
+
+### Deleta um recado
+DELETE {{ baseUrl }}/pessoas/1/
 
 # ---------
 
