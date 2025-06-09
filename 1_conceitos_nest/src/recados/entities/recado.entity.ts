@@ -5,7 +5,6 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -34,11 +33,11 @@ export class RecadoEntity {
   @ManyToOne(() => Pessoa)
   // Especifica a coluna "de" que armazena o ID da pessoa que enviou o recado
   @JoinColumn({ name: 'de' })
-  de: string;
+  de: Pessoa;
 
   // Muitos recados podem ser enviados para uma única pessoa (destinatário)
   @ManyToOne(() => Pessoa)
   // Especifica a coluna "para" que armazena o ID da pessoa que recebe o recado
   @JoinColumn({ name: 'para' })
-  para: string;
+  para: Pessoa;
 }

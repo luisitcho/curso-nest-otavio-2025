@@ -29,6 +29,7 @@ export class PessoasService {
       await this.pessoaRespository.save(pessoa);
       return pessoa;
     } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       if (error.code === '23505') {
         throw new ConflictException('E-mail ja está cadastrado!');
       }
@@ -48,7 +49,15 @@ export class PessoasService {
   }
 
   async findOne(id: number) {
-    return `This action returns a #${id} pessoa`;
+    const pessoa = await this.pessoaRespository.findOneBy({
+      id,
+    });
+
+    if (!pessoa) {
+      throw new NotFoundException('Pessoa não encontrada');
+    }
+
+    return pessoa;
   }
 
   async update(id: number, updatePessoaDto: UpdatePessoaDto) {
