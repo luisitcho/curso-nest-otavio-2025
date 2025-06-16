@@ -15,17 +15,17 @@ POST {{ baseUrl }}/recados/
 Content-Type: application/json
 
 {
-  "texto": "NOVO recado",
-  "deId": 7,
-  "paraId": 6
+  "texto": "NOVO recado de novo",
+  "deId": 12,
+  "paraId": 8
 }
 
 ### Atualiza um recado
-PATCH  {{ baseUrl }}/recados/5/
+PATCH  {{ baseUrl }}/recados/10/
 Content-Type: application/json
 
 {
-  "texto": "4445 NOVO recado",
+  "texto": "44454 NOVO recado",
   "lido": true
 }
 
