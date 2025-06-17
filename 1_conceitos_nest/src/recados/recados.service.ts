@@ -116,6 +116,6 @@ export class RecadosService {
       this.throwNotFoundError();
     }
 
-    return this.recadoRepository.remove(recado as RecadoEntity);
+    return this.recadoRepository.remove(recado);
   }
 }

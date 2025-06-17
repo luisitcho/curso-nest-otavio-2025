@@ -10,11 +10,13 @@ import {
   Patch,
   Post,
   Query,
+  UsePipes,
 } from '@nestjs/common';
 import { RecadosService } from './recados.service';
 import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { PaginationDto } from 'src/common/dto/pagination';
+import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id.pipe';
 
 // CRUD
 // Create -> POST -> Criar um recado
@@ -37,12 +39,8 @@ import { PaginationDto } from 'src/common/dto/pagination';
 //   para: string;
 // }
 
-interface PaginatinonQuery {
-  limit?: number; // Limite de recados a serem retornados
-  offset?: number; // Posição inicial para a busca de recados
-}
-
 @Controller('recados')
+@UsePipes(ParseIntIdPipe)
 export class RecadosController {
   constructor(private readonly recadosService: RecadosService) {}
   // Encontrar todos os recados
