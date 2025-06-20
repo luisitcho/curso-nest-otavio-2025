@@ -7,7 +7,7 @@ export class AddHeaderInterceptor implements NestInterceptor {
     next: CallHandler<any>,
   ): Observable<any> | Promise<Observable<any>> {
     const respose = context.switchToHttp().getResponse();
-    respose.setHeader('Content-Type', 'application/json');
+    respose.setHeader('X-Content-Type-Custom', 'application/json');
     return next.handle();
   }
 }
