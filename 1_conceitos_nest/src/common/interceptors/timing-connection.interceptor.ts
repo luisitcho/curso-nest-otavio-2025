@@ -7,6 +7,8 @@ export class TimingConnectionInterceptor implements NestInterceptor {
     next: CallHandler<any>,
   ): Promise<Observable<any>> {
     console.log('TimingConnectionInterceptor: Request started');
+
+    await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulating a delay
     return next.handle();
   }
 }

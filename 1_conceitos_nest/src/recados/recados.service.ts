@@ -20,6 +20,7 @@ export class RecadosService {
   }
 
   async findAll(pagination?: PaginationDto) {
+    console.log('RecadosService: findAll called with pagination:', pagination);
     const { limit, offset } = pagination || {};
     const recados = await this.recadoRepository.find({
       take: limit, // Limite de recados a serem retornados (por página)

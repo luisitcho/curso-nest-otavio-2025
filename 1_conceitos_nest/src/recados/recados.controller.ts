@@ -51,6 +51,10 @@ export class RecadosController {
   @Get() // /recados
   @UseInterceptors(TimingConnectionInterceptor)
   async findAll(@Query() pagination: PaginationDto) {
+    console.log(
+      'RecadosController: findAll called with pagination:',
+      pagination,
+    );
     const recados = await this.recadosService.findAll(pagination);
     return recados;
   }
