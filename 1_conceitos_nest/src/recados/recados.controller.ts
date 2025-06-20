@@ -19,6 +19,7 @@ import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { PaginationDto } from 'src/common/dto/pagination';
 import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id.pipe';
 import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
+import { TimingConnectionInterceptor } from 'src/common/interceptors/timing-connection.interceptor';
 
 // CRUD
 // Create -> POST -> Criar um recado
@@ -48,7 +49,7 @@ export class RecadosController {
   // Encontrar todos os recados
   @HttpCode(HttpStatus.OK) // Define o código de status HTTP para 200 OK
   @Get() // /recados
-  @UseInterceptors(AddHeaderInterceptor)
+  @UseInterceptors(TimingConnectionInterceptor)
   async findAll(@Query() pagination: PaginationDto) {
     const recados = await this.recadosService.findAll(pagination);
     return recados;
@@ -56,6 +57,7 @@ export class RecadosController {
 
   // Encontrar um recado específico
   @Get(':id') // /recados/:id
+  @UseInterceptors(AddHeaderInterceptor)
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.recadosService.findOne(id);
   }
