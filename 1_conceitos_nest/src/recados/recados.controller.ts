@@ -44,7 +44,7 @@ import { SimpleCacheInterceptor } from 'src/common/interceptors/simple-cache.int
 //   para: string;
 // }
 
-@UseInterceptors(SimpleCacheInterceptor)
+// @UseInterceptors(SimpleCacheInterceptor)
 @Controller('recados')
 @UsePipes(ParseIntIdPipe)
 export class RecadosController {
