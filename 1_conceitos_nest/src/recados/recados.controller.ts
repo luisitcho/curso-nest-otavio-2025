@@ -20,6 +20,7 @@ import { PaginationDto } from 'src/common/dto/pagination';
 import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id.pipe';
 import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
 import { TimingConnectionInterceptor } from 'src/common/interceptors/timing-connection.interceptor';
+import { ErrorHandlingInterceptor } from 'src/common/interceptors/error-handling.interceptor';
 
 // CRUD
 // Create -> POST -> Criar um recado
@@ -49,7 +50,7 @@ export class RecadosController {
   // Encontrar todos os recados
   @HttpCode(HttpStatus.OK) // Define o código de status HTTP para 200 OK
   @Get() // /recados
-  @UseInterceptors(TimingConnectionInterceptor)
+  @UseInterceptors(TimingConnectionInterceptor, ErrorHandlingInterceptor)
   async findAll(@Query() pagination: PaginationDto) {
     console.log(
       'RecadosController: findAll called with pagination:',
@@ -61,7 +62,7 @@ export class RecadosController {
 
   // Encontrar um recado específico
   @Get(':id') // /recados/:id
-  @UseInterceptors(AddHeaderInterceptor)
+  @UseInterceptors(AddHeaderInterceptor, ErrorHandlingInterceptor)
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.recadosService.findOne(id);
   }

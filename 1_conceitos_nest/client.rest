@@ -8,7 +8,7 @@ GET {{ baseUrl }}/recados/
 &offset=0
 # &user=Luis
 ### Lista um recado específico
-GET {{ baseUrl }}/recados/21/
+GET {{ baseUrl }}/recados/1/
 
 ### Cria um novo recado
 POST {{ baseUrl }}/recados/
