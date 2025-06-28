@@ -52,7 +52,7 @@ export class RecadosController {
   // Encontrar todos os recados
   @HttpCode(HttpStatus.OK) // Define o código de status HTTP para 200 OK
   @Get() // /recados
-  @UseInterceptors(TimingConnectionInterceptor, ErrorHandlingInterceptor)
+  // @UseInterceptors(TimingConnectionInterceptor, ErrorHandlingInterceptor)
   async findAll(@Query() pagination: PaginationDto) {
     console.log(
       'RecadosController: findAll called with pagination:',
@@ -64,7 +64,7 @@ export class RecadosController {
 
   // Encontrar um recado específico
   @Get(':id') // /recados/:id
-  @UseInterceptors(AddHeaderInterceptor, ErrorHandlingInterceptor)
+  // @UseInterceptors(AddHeaderInterceptor, ErrorHandlingInterceptor)
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.recadosService.findOne(id);
   }
