@@ -22,6 +22,7 @@ import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interce
 import { TimingConnectionInterceptor } from 'src/common/interceptors/timing-connection.interceptor';
 import { ErrorHandlingInterceptor } from 'src/common/interceptors/error-handling.interceptor';
 import { SimpleCacheInterceptor } from 'src/common/interceptors/simple-cache.interceptor';
+import { ChangeDataInterceptor } from 'src/common/interceptors/change-data.interceptor';
 
 // CRUD
 // Create -> POST -> Criar um recado
@@ -45,6 +46,7 @@ import { SimpleCacheInterceptor } from 'src/common/interceptors/simple-cache.int
 // }
 
 // @UseInterceptors(SimpleCacheInterceptor)
+@UseInterceptors(ChangeDataInterceptor)
 @Controller('recados')
 @UsePipes(ParseIntIdPipe)
 export class RecadosController {
@@ -54,10 +56,10 @@ export class RecadosController {
   @Get() // /recados
   // @UseInterceptors(TimingConnectionInterceptor, ErrorHandlingInterceptor)
   async findAll(@Query() pagination: PaginationDto) {
-    console.log(
-      'RecadosController: findAll called with pagination:',
-      pagination,
-    );
+    // console.log(
+    //   'RecadosController: findAll called with pagination:',
+    //   pagination,
+    // );
     const recados = await this.recadosService.findAll(pagination);
     return recados;
   }

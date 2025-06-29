@@ -8,12 +8,12 @@ export class SimpleCacheInterceptor implements NestInterceptor {
     context: ExecutionContext,
     next: CallHandler<any>,
   ): Promise<Observable<any>> {
-    console.log('SimpleCacheInterceptor: Request started');
+    // console.log('SimpleCacheInterceptor: Request started');
     const request = context.switchToHttp().getRequest();
     const url = request.url;
 
     if (this.cache.has(url)) {
-      console.log('SimpleCacheInterceptor: Returning cached response', url);
+      // console.log('SimpleCacheInterceptor: Returning cached response', url);
       return of(this.cache.get(url));
     }
 
