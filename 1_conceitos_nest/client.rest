@@ -7,6 +7,7 @@ GET {{ baseUrl }}/recados/
 ?limit=10
 &offset=0
 # &user=Luis
+Authorization: Bearer <valid-token>
 ### Lista um recado específico
 GET {{ baseUrl }}/recados/1/
 
