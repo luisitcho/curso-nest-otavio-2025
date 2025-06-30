@@ -10,6 +10,7 @@ import {
   Patch,
   Post,
   Query,
+  Req,
   UseInterceptors,
   UsePipes,
 } from '@nestjs/common';
@@ -24,6 +25,7 @@ import { ErrorHandlingInterceptor } from 'src/common/interceptors/error-handling
 import { SimpleCacheInterceptor } from 'src/common/interceptors/simple-cache.interceptor';
 import { ChangeDataInterceptor } from 'src/common/interceptors/change-data.interceptor';
 import { AuthTokenInterceptor } from 'src/common/interceptors/auth-token.interceptor';
+import { Request } from 'express';
 
 // CRUD
 // Create -> POST -> Criar um recado
@@ -57,7 +59,8 @@ export class RecadosController {
   @HttpCode(HttpStatus.OK) // Define o código de status HTTP para 200 OK
   @Get() // /recados
   // @UseInterceptors(TimingConnectionInterceptor, ErrorHandlingInterceptor)
-  async findAll(@Query() pagination: PaginationDto) {
+  async findAll(@Query() pagination: PaginationDto, @Req() req: Request) {
+    console.log('RecadosController', req['user']);
     // console.log(
     //   'RecadosController: findAll called with pagination:',
     //   pagination,

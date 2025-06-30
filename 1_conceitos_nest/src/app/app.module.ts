@@ -1,9 +1,16 @@
-import { Module } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm'; // <-- aqui
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { RecadosModule } from 'src/recados/recados.module';
 import { PessoasModule } from 'src/pessoas/pessoas.module';
+import { SimpleMiddleware } from 'src/common/middlewares/simple.middlware';
+import { OtherMiddleware } from 'src/common/middlewares/other.middleware';
 
 @Module({
   imports: [
@@ -23,4 +30,11 @@ import { PessoasModule } from 'src/pessoas/pessoas.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(SimpleMiddleware, OtherMiddleware).forRoutes({
+      path: '*', // Aplica o middleware a todas as rotas
+      method: RequestMethod.ALL, // Aplica a todos os métodos HTTP
+    });
+  }
+}
