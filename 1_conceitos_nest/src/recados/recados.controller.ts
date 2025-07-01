@@ -66,6 +66,7 @@ export class RecadosController {
     //   pagination,
     // );
     const recados = await this.recadosService.findAll(pagination);
+    // throw new Error('Erro ao buscar recados'); // Simulando um erro para testar o interceptor de tratamento de erros
     return recados;
   }
 

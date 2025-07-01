@@ -11,6 +11,8 @@ import { RecadosModule } from 'src/recados/recados.module';
 import { PessoasModule } from 'src/pessoas/pessoas.module';
 import { SimpleMiddleware } from 'src/common/middlewares/simple.middlware';
 import { OtherMiddleware } from 'src/common/middlewares/other.middleware';
+import { MyExceptionFilter } from 'src/common/filters/my-exception.filter';
+import { ErrorExceptionFilter } from 'src/common/filters/error-exception.filter';
 
 @Module({
   imports: [
@@ -28,7 +30,11 @@ import { OtherMiddleware } from 'src/common/middlewares/other.middleware';
     PessoasModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    // { provide: 'APP_FILTER', useClass: MyExceptionFilter },
+    { provide: 'APP_FILTER', useClass: ErrorExceptionFilter },
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
